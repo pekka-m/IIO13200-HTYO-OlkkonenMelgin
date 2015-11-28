@@ -9,30 +9,35 @@ namespace Finnkino
 {
     public class MockAPIGateway : IAPIGateway
     {
-        public Movie[] getMovies(int theatre)
+        public List<MovieBox> getMovies(int theatre)
         {
 
-            Movie[] movies = new Movie[10];
-            for (int i = 0; i < 10; i++)
+            List<MovieBox> movies = new List<MovieBox>();
+            DateTime dateTime = new DateTime(2015, 11, 28);
+            DateTime dateTime2 = new DateTime(2015, 11, 30);
+            DateTime dateTime3 = new DateTime(2015, 12, 05);
+            for (int i = 0; i < 30; i++)
             {
-                movies[i] = new Movie();
+                movies.Add(new MovieBox());
                 movies[i].EventId = i;
-                movies[i].Title = "Title " + i;
-                movies[i].OriginalTitle = "OriginalTitle " + i;
-                movies[i].LengthInMinutes = 100 + i;
-                movies[i].LocalReleaseDate = DateTime.Now;
-                movies[i].RatingImagePath = "www.tes.ti/images/" + i + ".png";
-                movies[i].ShortSynopsis = "ShortSynopsis " + i + " is best synopsis...";
-                movies[i].Shows = new Show[5];
-                for (int j = 0; j < 5; j++)
+                movies[i].AgeLimit = i.ToString();
+                movies[i].Auditorium = "Auditorium " + i;
+                movies[i].Genre = new string[] {"Comedy", "Sci-fi" };
+                movies[i].ImagePath = "www.tes.ti/images/" + i + ".png";
+                movies[i].ReleaseDate = DateTime.Now;
+                if (i % 3 == 0)
                 {
-                    movies[i].Shows[j] = new Show();
-                    movies[i].Shows[j].Id = j;
-                    movies[i].Shows[j].Auditorium = "Auditorium " + j;
-                    movies[i].Shows[j].ShowStart = new DateTime();
-                    movies[i].Shows[j].ShowEnd = new DateTime();
+                    movies[i].ShowDate = dateTime;
                 }
-            Debug.WriteLine(movies[i].LocalReleaseDate.ToString());
+                else if (i % 3 == 1)
+                {
+                    movies[i].ShowDate = dateTime2;
+                }
+                else
+                {
+                    movies[i].ShowDate = dateTime3;
+                }
+                movies[i].Theatre = i;
             }
             return movies;
         }
@@ -42,9 +47,9 @@ namespace Finnkino
             return new Movie();
         }
 
-        public Show[] getMovieSchedules(MovieBox movieBox)
+        public List<Show> getMovieSchedules(MovieBox movieBox)
         {
-            return new Show[5];
+            return new List<Show>();
         }
     }
 }

@@ -8,15 +8,10 @@ namespace Finnkino
 {
     public class Sorter
     {
-        public List<Movie> sortByDay(Movie[] movies)
+        public List<MovieBox> sortByDay(List<MovieBox> movies)
         {
-            List<Movie> movieList = new List<Movie>();
-            foreach (var Movie in movies)
-            {
-                movieList.Add(Movie);
-            }
-            movieList.Sort((x, y) => DateTime.Compare(x.LocalReleaseDate, y.LocalReleaseDate));
-            return movieList;
+            movies.Sort((x, y) => DateTime.Compare(x.ShowDate, y.ShowDate));
+            return movies;
         }
     }
 }

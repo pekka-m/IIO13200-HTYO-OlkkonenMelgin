@@ -22,14 +22,27 @@ namespace Finnkino
     public partial class MainWindow : Window
     {
         List<Movie> Movies = new List<Movie>();
+        List<string> Titles = new List<string>();
+        List<MovieCollection> MovieCollectionList;
         BrowserPresenter presenter;
         public MainWindow()
         {
             InitializeComponent();
+
+            Titles.Add("Päivä 1");
+            Titles.Add("Päivä 2");
+            Titles.Add("Päivä 3");
+
             IAPIGateway gateway = new MockAPIGateway();
             this.presenter = new BrowserPresenter(gateway);
-            this.Movies = this.presenter.initialize(1);
-            itemsControl.ItemsSource = this.Movies;
+            this.MovieCollectionList = this.presenter.initialize(1);
+            /*
+            Browser = new List<MovieCollection>();
+            Browser.Add(new MovieCollection("Päivä 1", this.Movies));
+            Browser.Add(new MovieCollection("Päivä 2", this.Movies));
+            Browser.Add(new MovieCollection("Päivä 3", this.Movies));
+            */
+            BrowserIC.ItemsSource = MovieCollectionList;
         }
     }
 }

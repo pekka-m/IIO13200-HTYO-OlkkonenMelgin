@@ -8,8 +8,8 @@ namespace Finnkino
 {
     public interface IAPIGateway
     {
-        Movie[] getMovies(int theatre);
+        List<MovieBox> getMovies(int theatre);
         Movie getMovieDetails(MovieBox movieBox);
-        Show[] getMovieSchedules(MovieBox movieBox);
+        List<Show> getMovieSchedules(MovieBox movieBox);
     }
 }
