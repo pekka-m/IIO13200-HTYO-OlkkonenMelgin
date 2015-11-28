@@ -1,0 +1,17 @@
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\bin\Debug\Finnkino.exe.config
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\bin\Debug\Finnkino.exe
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\bin\Debug\Finnkino.pdb
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino.csprojResolveAssemblyReference.cache
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\MainWindow.g.cs
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\App.g.cs
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino_MarkupCompile.cache
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino_MarkupCompile.lref
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\MainWindow.baml
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino.g.resources
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino.Properties.Resources.resources
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino.csproj.GenerateResource.Cache
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino.exe
+d:\users\pekka\documents\visual studio 2015\Projects\Finnkino\Finnkino\obj\Debug\Finnkino.pdb
+D:\Users\Pekka\Documents\GitHub\netharkka\Finnkino\bin\Debug\Finnkino.exe.config
+D:\Users\Pekka\Documents\GitHub\netharkka\Finnkino\obj\Debug\Finnkino.exe
+D:\Users\Pekka\Documents\GitHub\netharkka\Finnkino\obj\Debug\Finnkino.pdb
