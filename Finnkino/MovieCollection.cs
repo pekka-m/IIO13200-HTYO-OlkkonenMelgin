@@ -12,5 +12,16 @@ namespace Finnkino
     {
         public DateTime Day { get; set; }
         public List<MovieBox> Movies { get; set; }
+
+        public MovieCollection()
+        {
+
+        }
+
+        public MovieCollection(MovieCollection copy)
+        {
+            Day = copy.Day;
+            Movies = copy.Movies;
+        }
     }
 }

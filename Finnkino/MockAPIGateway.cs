@@ -56,6 +56,7 @@ namespace Finnkino
         public List<string> getAuditoriums(int area)
         {
             List<string> auditoriums = new List<string>();
+            auditoriums.Add("Kaikki");
             if (area == 1015)
             {
                 auditoriums.Add("Fantasia 1");

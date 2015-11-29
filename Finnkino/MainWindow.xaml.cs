@@ -32,45 +32,31 @@ namespace Finnkino
         public MainWindow()
         {
             InitializeComponent();
+            this.initializeFilters();          
+            
             IAPIGateway gateway = new MockAPIGateway();
             this.presenter = new BrowserPresenter(gateway);
-            this.filters = new Dictionary<string, string>();
-
-            filters.Add("Day", "Kaikki");
-            filters.Add("Genre", "Kaikki");
-            filters.Add("AgeLimit", "Kaikki");
-            filters.Add("Auditorium", "Kaikki");
             comboBox_Area.ItemsSource = this.presenter.getAreas();
-            this.initializeFilters();          
         }
 
         private void comboBox_Area_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            filters["Day"] = "Kaikki";
-            filters["Genre"] = "Kaikki";
-            filters["AgeLimit"] = "Kaikki";
-            filters["Auditorium"] = "Kaikki";
             Debug.WriteLine("valittu area / teatteri id: " + comboBox_Area.SelectedValue.ToString());
-            this.collection = this.presenter.initialize(int.Parse(comboBox_Area.SelectedValue.ToString()));
-            BrowserIC.ItemsSource = this.collection;
+            //this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
+            //BrowserIC.ItemsSource = this.collection;
             comboBox_Filter_Auditorium.ItemsSource = this.presenter.getAuditoriums(int.Parse(comboBox_Area.SelectedValue.ToString()));
+            comboBox_Filter_Auditorium.SelectedIndex = 0;
         }
 
         private void comboBox_Filter_Genre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             filters["Genre"] = comboBox_Filter_Genre.SelectedValue.ToString();
-            this.collection = this.presenter.getMovies(this.filters);
-            //this.collection = this.presenter.filterByGenre(comboBox_Filter_Genre.SelectedValue.ToString());
-            BrowserIC.ItemsSource = this.collection;
         }
 
 
         private void comboBox_Filter_AgeLimit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             filters["AgeLimit"] = comboBox_Filter_AgeLimit.SelectedValue.ToString();
-            this.collection = this.presenter.getMovies(this.filters);
-            //this.collection = this.presenter.filterByAgeLimit(comboBox_Filter_AgeLimit.SelectedValue.ToString());
-            BrowserIC.ItemsSource = this.collection;
         }
 
         private void comboBox_Filter_Auditorium_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -83,12 +69,11 @@ namespace Finnkino
             {
                 filters["Auditorium"] = "Kaikki";
             }
-            this.collection = this.presenter.getMovies(this.filters);
-            BrowserIC.ItemsSource = this.collection;
         }
 
         private void comboBox_Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            checkBox_allDays.IsChecked = false;
             if (!filters.ContainsKey("Day"))
             {
                 filters["Day"] = "Kaikki";
@@ -97,17 +82,36 @@ namespace Finnkino
             {
                 filters["Day"] = comboBox_Sort.SelectedValue.ToString();
             }
-            this.collection = this.presenter.getMovies(this.filters);
         }
 
         private void button_clearDay_Click(object sender, RoutedEventArgs e)
         {
             filters["Day"] = "Kaikki";
-            this.collection = this.presenter.getMovies(this.filters);
+            this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
             BrowserIC.ItemsSource = this.collection;
         }
+        private void button_filter_Click(object sender, RoutedEventArgs e)
+        {
+            if (checkBox_allDays.IsChecked == true)
+            {
+                filters["Day"] = "Kaikki";
+            }
+            else
+            {
+                filters["Day"] = comboBox_Sort.SelectedValue.ToString();
+            }
+            this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
+            BrowserIC.ItemsSource = this.collection;
+        }
+
         private void initializeFilters()
         {
+            this.filters = new Dictionary<string, string>();
+            filters["Day"] = "Kaikki";
+            filters["Genre"] = "Kaikki";
+            filters["AgeLimit"] = "Kaikki";
+            filters["Auditorium"] = "Kaikki";
+            checkBox_allDays.IsChecked = true;
             genres = new List<string>();
             genres.Add("Kaikki");
             genres.Add("Animaatio");
@@ -140,6 +144,7 @@ namespace Finnkino
             comboBox_Filter_AgeLimit.ItemsSource = this.ageLimits;
             comboBox_Filter_Genre.SelectedIndex = 0;
             comboBox_Filter_AgeLimit.SelectedIndex = 0;
+            //comboBox_Filter_Auditorium.SelectedIndex = 0;
 
             dates = new List<DateTime>();
             for (int i = 0; i < 14; i++)
@@ -149,7 +154,7 @@ namespace Finnkino
             }
             comboBox_Sort.ItemsSource = this.dates;
             comboBox_Sort.ItemStringFormat = "ddd dd.MM";
-            //comboBox_Sort.SelectedIndex = 0;
         }
+
     }
 }

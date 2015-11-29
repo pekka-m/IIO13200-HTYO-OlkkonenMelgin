@@ -10,62 +10,61 @@ namespace Finnkino
 {
     public class Filter
     {
-        public ObservableCollection<MovieCollection> filterByGenre(ObservableCollection<MovieCollection> collection, string genre)
+        public void filterByDay(ObservableCollection<MovieCollection> collection, string day)
         {
-            ObservableCollection<MovieCollection> tmp = new ObservableCollection<MovieCollection>();
-            int tmpIndex = 0;
-            for (int i = 0; i < collection.Count; i++)
+            if (day != "Kaikki")
             {
-                tmp.Add(new MovieCollection());
-                tmp[tmpIndex].Day = collection[i].Day;
-                tmp[tmpIndex].Movies = new List<MovieBox>();
-                for (int j = 0; j < collection[i].Movies.Count; j++)
+                DateTime date = DateTime.ParseExact(day, "d.M.yyyy HH.mm.ss", null);
+                for (int i = collection.Count - 1; i >= 0; i--)
                 {
-                    if (collection[i].Movies[j].Genre.Contains<string>(genre))
+                    if (String.Format("{0:dd.MM}", collection[i].Day) != String.Format("{0:dd.MM}", date))
                     {
-                        tmp[tmpIndex].Movies.Add(collection[i].Movies[j]);
-                        Debug.WriteLine("lisätään temppiin: " + collection[i].Movies[j].EventId.ToString());
+                        collection.RemoveAt(i);
                     }
                 }
-                if (tmp[tmpIndex].Movies.Count == 0)
-                {
-                    tmp.RemoveAt(tmpIndex);
-                }
-                else
-                {
-                    tmpIndex++;
-                }
             }
-            return tmp;
         }
 
-        public ObservableCollection<MovieCollection> filterByAgeLimit(ObservableCollection<MovieCollection> collection, string ageLimit)
+        public void filterByGenre(ObservableCollection<MovieCollection> collection, string genre)
         {
-            ObservableCollection<MovieCollection> tmp = new ObservableCollection<MovieCollection>();
-            int tmpIndex = 0;
-            for (int i = 0; i < collection.Count; i++)
-            {
-                tmp.Add(new MovieCollection());
-                tmp[tmpIndex].Day = collection[i].Day;
-                tmp[tmpIndex].Movies = new List<MovieBox>();
-                for (int j = 0; j < collection[i].Movies.Count; j++)
+            if (genre != "Kaikki")
+            {            
+                for (int i = collection.Count-1; i >= 0; i--)
                 {
-                    if (collection[i].Movies[j].AgeLimit == ageLimit)
+                    for (int j = collection[i].Movies.Count-1; j >= 0; j--)
                     {
-                        tmp[tmpIndex].Movies.Add(collection[i].Movies[j]);
-                        Debug.WriteLine("lisätään temppiin: " + collection[i].Movies[j].EventId.ToString());
+                        if (!collection[i].Movies[j].Genre.Contains<string>(genre))
+                        {
+                            collection[i].Movies.RemoveAt(j);
+                        }
+                    }
+                    if (collection[i].Movies.Count == 0)
+                    {
+                        collection.RemoveAt(i);
                     }
                 }
-                if (tmp[tmpIndex].Movies.Count == 0)
+            }
+        }
+
+        public void filterByAgeLimit(ObservableCollection<MovieCollection> collection, string ageLimit)
+        {
+            if (ageLimit != "Kaikki")
+            {
+                for (int i = collection.Count - 1; i >= 0; i--)
                 {
-                    tmp.RemoveAt(tmpIndex);
-                }
-                else
-                {
-                    tmpIndex++;
+                    for (int j = collection[i].Movies.Count - 1; j >= 0; j--)
+                    {
+                        if (!collection[i].Movies[j].AgeLimit.Equals(ageLimit))
+                        {
+                            collection[i].Movies.RemoveAt(j);
+                        }
+                    }
+                    if (collection[i].Movies.Count == 0)
+                    {
+                        collection.RemoveAt(i);
+                    }
                 }
             }
-            return tmp;
         }
     }
 }

@@ -20,10 +20,11 @@ namespace Finnkino
             this.APIGateway = APIGateway;
         }
 
-        public ObservableCollection<MovieCollection> initialize(int theatre)
+        public ObservableCollection<MovieCollection> getMovies(int theatre, Dictionary<string, string> filters)
         {
             //järjestetään kaikki movieboxit showdaten mukaan nousevaan järjestykseen
             Sorter sorter = new Sorter();
+            Filter filter = new Filter();
             this.movieBoxList = sorter.sortByDay(this.APIGateway.getMovies(theatre));
             sorter = null;
 
@@ -43,36 +44,34 @@ namespace Finnkino
                 this.dateList = null;
                 this.movieBoxList = null;
             }
-            ObservableCollection<MovieCollection> obCol = new ObservableCollection<MovieCollection>();
-            foreach (var MovieCollection in this.movieCollectionList)
-            {
-                Debug.WriteLine("adataan asiaa johonkin");
-                obCol.Add(MovieCollection);
-            }
-            return obCol;
-        }
 
+            filter.filterByDay(movieCollectionList, filters["Day"]);
+            filter.filterByGenre(movieCollectionList, filters["Genre"]);
+            filter.filterByAgeLimit(movieCollectionList, filters["AgeLimit"]);
+
+            return this.movieCollectionList;
+        }
+        /*
         public ObservableCollection<MovieCollection> getMovies(Dictionary<string, string> filters)
         {
-            ObservableCollection<MovieCollection> tmp = new ObservableCollection<MovieCollection>();
-
-            if (filters["Day"] != "Kaikki")
+            foreach (var filtteri in filters)
             {
-                //filtteri filtteröi päivän mukaan
-            }
-            if (filters["Genre"] != "Kaikki")
-            {
-
+                Debug.WriteLine("tässä filtteri: " + filtteri.Key.ToString() + " = " + filtteri.Value.ToString());
             }
 
-            foreach (var filter in filters)
-            {
-                Debug.WriteLine("tässä filtteri: " + filter.Key.ToString() + " = " + filter.Value.ToString());
+            ObservableCollection<MovieCollection> tmp;
+            Filter filter = new Filter();
 
-            }
-            return null;
+            //tuolla noin tehään temppilista (filteröity lista) jota vielä filteröiään genren yäm mukaan...
+            //tmp = filter.filterByDay(movieCollectionList, filters["Day"]);
+
+            //filter.filterByGenre(tmp, filters["Genre"]);
+            //filter.filterByAgeLimit(tmp, filters["AgeLimit"]);
+
+            return tmp;
         }
-
+        */
+        /*
         public ObservableCollection<MovieCollection> filterByGenre(string genre)
         {
             if (genre == "Kaikki")
@@ -98,7 +97,7 @@ namespace Finnkino
                 return filter.filterByAgeLimit(movieCollectionList, ageLimit);
             }
         }
-
+        */
         public List<Area> getAreas()
         {
             return this.APIGateway.getAreas();

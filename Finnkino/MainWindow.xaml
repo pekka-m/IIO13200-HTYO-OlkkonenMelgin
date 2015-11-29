@@ -13,12 +13,13 @@
                 <StackPanel Orientation="Horizontal">
                     <ComboBox x:Name="comboBox_Area" DisplayMemberPath="Theatre" SelectedValuePath="AreaId" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectionChanged="comboBox_Area_SelectionChanged"/>
                     <ComboBox x:Name="comboBox_Sort" FontSize="12" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboBox_Sort_SelectionChanged"/>
-                    <Button x:Name="button_clearDay" VerticalAlignment="Top" Content="Kaikki päivät" Margin="10 0 0 0" Width="80" Click="button_clearDay_Click" />
+                    <CheckBox x:Name="checkBox_allDays" VerticalAlignment="Top" Content="Kaikki päivät" Margin="10 3 0 0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <ComboBox x:Name="comboBox_Filter_Genre" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" SelectionChanged="comboBox_Filter_Genre_SelectionChanged"/>
                     <ComboBox x:Name="comboBox_Filter_AgeLimit" FontSize="12" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboBox_Filter_AgeLimit_SelectionChanged"/>
                     <ComboBox x:Name="comboBox_Filter_Auditorium" FontSize="12" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboBox_Filter_Auditorium_SelectionChanged"/>
+                    <Button x:Name="button_filter" VerticalAlignment="Top" Content="Hae" Margin="10 0 0 0" Width="80" Click="button_filter_Click" />
                 </StackPanel>
                 <ItemsControl x:Name="BrowserIC" Margin="0,5,0,0">
                     <ItemsControl.ItemTemplate>
