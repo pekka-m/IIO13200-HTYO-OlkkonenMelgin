@@ -52,6 +52,27 @@ namespace Finnkino
             return obCol;
         }
 
+        public ObservableCollection<MovieCollection> getMovies(Dictionary<string, string> filters)
+        {
+            ObservableCollection<MovieCollection> tmp = new ObservableCollection<MovieCollection>();
+
+            if (filters["Day"] != "Kaikki")
+            {
+                //filtteri filtteröi päivän mukaan
+            }
+            if (filters["Genre"] != "Kaikki")
+            {
+
+            }
+
+            foreach (var filter in filters)
+            {
+                Debug.WriteLine("tässä filtteri: " + filter.Key.ToString() + " = " + filter.Value.ToString());
+
+            }
+            return null;
+        }
+
         public ObservableCollection<MovieCollection> filterByGenre(string genre)
         {
             if (genre == "Kaikki")
@@ -62,6 +83,19 @@ namespace Finnkino
             {
                 Filter filter = new Filter();          
                 return filter.filterByGenre(movieCollectionList, genre);
+            }
+        }
+
+        public ObservableCollection<MovieCollection> filterByAgeLimit(string ageLimit)
+        {
+            if (ageLimit == "Kaikki")
+            {
+                return movieCollectionList;
+            }
+            else
+            {
+                Filter filter = new Filter();
+                return filter.filterByAgeLimit(movieCollectionList, ageLimit);
             }
         }
 

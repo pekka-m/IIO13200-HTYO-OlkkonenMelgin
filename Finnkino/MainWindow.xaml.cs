@@ -25,36 +25,87 @@ namespace Finnkino
         BrowserPresenter presenter;
         List<string> genres;
         List<string> ageLimits;
+        List<DateTime> dates;
         ObservableCollection<MovieCollection> collection;
+        Dictionary<string, string> filters;
 
         public MainWindow()
         {
             InitializeComponent();
             IAPIGateway gateway = new MockAPIGateway();
             this.presenter = new BrowserPresenter(gateway);
+            this.filters = new Dictionary<string, string>();
 
-            collection = new ObservableCollection<MovieCollection>();
-            BrowserIC.ItemsSource = collection;
-
+            filters.Add("Day", "Kaikki");
+            filters.Add("Genre", "Kaikki");
+            filters.Add("AgeLimit", "Kaikki");
+            filters.Add("Auditorium", "Kaikki");
             comboBox_Area.ItemsSource = this.presenter.getAreas();
-
+            this.initializeFilters();          
         }
 
         private void comboBox_Area_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            filters["Day"] = "Kaikki";
+            filters["Genre"] = "Kaikki";
+            filters["AgeLimit"] = "Kaikki";
+            filters["Auditorium"] = "Kaikki";
             Debug.WriteLine("valittu area / teatteri id: " + comboBox_Area.SelectedValue.ToString());
             this.collection = this.presenter.initialize(int.Parse(comboBox_Area.SelectedValue.ToString()));
             BrowserIC.ItemsSource = this.collection;
-            this.initializeFilters();          
             comboBox_Filter_Auditorium.ItemsSource = this.presenter.getAuditoriums(int.Parse(comboBox_Area.SelectedValue.ToString()));
         }
 
         private void comboBox_Filter_Genre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.collection = this.presenter.filterByGenre(comboBox_Filter_Genre.SelectedValue.ToString());
+            filters["Genre"] = comboBox_Filter_Genre.SelectedValue.ToString();
+            this.collection = this.presenter.getMovies(this.filters);
+            //this.collection = this.presenter.filterByGenre(comboBox_Filter_Genre.SelectedValue.ToString());
             BrowserIC.ItemsSource = this.collection;
         }
 
+
+        private void comboBox_Filter_AgeLimit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            filters["AgeLimit"] = comboBox_Filter_AgeLimit.SelectedValue.ToString();
+            this.collection = this.presenter.getMovies(this.filters);
+            //this.collection = this.presenter.filterByAgeLimit(comboBox_Filter_AgeLimit.SelectedValue.ToString());
+            BrowserIC.ItemsSource = this.collection;
+        }
+
+        private void comboBox_Filter_Auditorium_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                filters["Auditorium"] = comboBox_Filter_Auditorium.SelectedValue.ToString();
+            }
+            catch (Exception)
+            {
+                filters["Auditorium"] = "Kaikki";
+            }
+            this.collection = this.presenter.getMovies(this.filters);
+            BrowserIC.ItemsSource = this.collection;
+        }
+
+        private void comboBox_Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!filters.ContainsKey("Day"))
+            {
+                filters["Day"] = "Kaikki";
+            }
+            else
+            {
+                filters["Day"] = comboBox_Sort.SelectedValue.ToString();
+            }
+            this.collection = this.presenter.getMovies(this.filters);
+        }
+
+        private void button_clearDay_Click(object sender, RoutedEventArgs e)
+        {
+            filters["Day"] = "Kaikki";
+            this.collection = this.presenter.getMovies(this.filters);
+            BrowserIC.ItemsSource = this.collection;
+        }
         private void initializeFilters()
         {
             genres = new List<string>();
@@ -89,21 +140,16 @@ namespace Finnkino
             comboBox_Filter_AgeLimit.ItemsSource = this.ageLimits;
             comboBox_Filter_Genre.SelectedIndex = 0;
             comboBox_Filter_AgeLimit.SelectedIndex = 0;
-        }
 
-        private void comboBox_Filter_AgeLimit_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void comboBox_Filter_Auditorium_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void comboBox_Sort_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            dates = new List<DateTime>();
+            for (int i = 0; i < 14; i++)
+            {
+                dates.Add(DateTime.Now.AddDays(i));
+                Debug.WriteLine(DateTime.Now.AddDays(i));
+            }
+            comboBox_Sort.ItemsSource = this.dates;
+            comboBox_Sort.ItemStringFormat = "ddd dd.MM";
+            //comboBox_Sort.SelectedIndex = 0;
         }
     }
 }
