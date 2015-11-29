@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Area.cs" />
     <Compile Include="MovieCollection.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="MovieBox.cs" />

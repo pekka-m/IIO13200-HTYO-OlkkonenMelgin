@@ -11,7 +11,7 @@ namespace Finnkino
     public class BrowserPresenter
     {
         private IAPIGateway APIGateway;
-        private List<MovieCollection> movieCollectionList; //kuvat järjestetty päivittäin collectioneihin (oikea data)
+        private ObservableCollection<MovieCollection> movieCollectionList; //kuvat järjestetty päivittäin collectioneihin (oikea data)
         private List<DateTime> dateList;
         private List<MovieBox> movieBoxList;
 
@@ -20,7 +20,7 @@ namespace Finnkino
             this.APIGateway = APIGateway;
         }
 
-        public List<MovieCollection> initialize(int theatre)
+        public ObservableCollection<MovieCollection> initialize(int theatre)
         {
             //järjestetään kaikki movieboxit showdaten mukaan nousevaan järjestykseen
             Sorter sorter = new Sorter();
@@ -43,7 +43,36 @@ namespace Finnkino
                 this.dateList = null;
                 this.movieBoxList = null;
             }
-            return this.movieCollectionList;
+            ObservableCollection<MovieCollection> obCol = new ObservableCollection<MovieCollection>();
+            foreach (var MovieCollection in this.movieCollectionList)
+            {
+                Debug.WriteLine("adataan asiaa johonkin");
+                obCol.Add(MovieCollection);
+            }
+            return obCol;
+        }
+
+        public ObservableCollection<MovieCollection> filterByGenre(string genre)
+        {
+            if (genre == "Kaikki")
+            {
+                return movieCollectionList;
+            }
+            else
+            {
+                Filter filter = new Filter();          
+                return filter.filterByGenre(movieCollectionList, genre);
+            }
+        }
+
+        public List<Area> getAreas()
+        {
+            return this.APIGateway.getAreas();
+        }
+
+        public List<string> getAuditoriums(int area)
+        {
+            return this.APIGateway.getAuditoriums(area);
         }
 
         //haetaan dateList-listaan kaikki eri showpäivät
@@ -67,7 +96,7 @@ namespace Finnkino
         //ja siirrytään datelistassa seuraavaan päivään
         private void setMovieCollectionList()
         {
-            this.movieCollectionList = new List<MovieCollection>();
+            this.movieCollectionList = new ObservableCollection<MovieCollection>();
             int dateListIndex = 0;
             List<MovieBox> movieBoxListTemp = new List<MovieBox>();
             MovieCollection movieCollectionTemp = new MovieCollection();
