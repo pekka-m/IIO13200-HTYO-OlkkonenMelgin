@@ -14,7 +14,7 @@ namespace Finnkino
         {
             if (day != "Kaikki")
             {
-                DateTime date = DateTime.ParseExact(day, "d.M.yyyy HH.mm.ss", null);
+                DateTime date = DateTime.ParseExact(day, "d.M.yyyy HH:mm:ss", null);
                 for (int i = collection.Count - 1; i >= 0; i--)
                 {
                     if (String.Format("{0:dd.MM}", collection[i].Day) != String.Format("{0:dd.MM}", date))
@@ -33,7 +33,7 @@ namespace Finnkino
                 {
                     for (int j = collection[i].Movies.Count-1; j >= 0; j--)
                     {
-                        if (!collection[i].Movies[j].Genre.Contains<string>(genre))
+                        if (!collection[i].Movies[j].getGenres().Contains<string>(genre))
                         {
                             collection[i].Movies.RemoveAt(j);
                         }
@@ -54,7 +54,7 @@ namespace Finnkino
                 {
                     for (int j = collection[i].Movies.Count - 1; j >= 0; j--)
                     {
-                        if (!collection[i].Movies[j].AgeLimit.Equals(ageLimit))
+                        if (!collection[i].Movies[j].Rating.Equals(ageLimit))
                         {
                             collection[i].Movies.RemoveAt(j);
                         }

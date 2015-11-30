@@ -1,20 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Finnkino
 {
     public class MovieBox
     {
-        public int EventId { get; set; }
-        public string AgeLimit { get; set; }
-        public string Auditorium { get; set; }
-        public string[] Genre { get; set; }
-        public string ImagePath { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public DateTime ShowDate { get; set; }
-        public int Theatre { get; set; }
+        [XmlElement]
+        public int EventID { get; set; }
+
+        [XmlElement]
+        public string Rating { get; set; }
+
+        [XmlElement]
+        public string TheatreAuditorium { get; set; }
+
+        [XmlElement]
+        public string Genres { get; set; }
+        
+        [XmlElement("Images")]
+        public XMLEventImageMedium Images { get; set; }
+
+        [XmlElement]
+        public string dtLocalRelease { get; set; }
+
+        [XmlElement]
+        public string dttmShowStart { get; set; }
+
+        [XmlElement]
+        public int TheatreID { get; set; }
+
+        public string[] getGenres()
+        {
+            return Regex.Split(this.Genres, ", ");
+        }
+
+        public DateTime getShowStart()
+        {
+            //Debug.WriteLine("ASDFASDFSADFSADF" + this.ShowStart);
+            return DateTime.ParseExact(this.dttmShowStart, "yyyy-MM-dd'T'HH:mm:ss", null);
+        }
     }
 }

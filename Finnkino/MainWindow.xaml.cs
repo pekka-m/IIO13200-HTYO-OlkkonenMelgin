@@ -34,7 +34,7 @@ namespace Finnkino
             InitializeComponent();
             this.initializeFilters();          
             
-            IAPIGateway gateway = new MockAPIGateway();
+            IAPIGateway gateway = new APIGateway();
             this.presenter = new BrowserPresenter(gateway);
             comboBox_Area.ItemsSource = this.presenter.getAreas();
         }
@@ -100,6 +100,7 @@ namespace Finnkino
             {
                 filters["Day"] = comboBox_Sort.SelectedValue.ToString();
             }
+            //Debug.WriteLine("JASDJFASJFDJASFJASJ" + filters["Day"]);
             this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
             BrowserIC.ItemsSource = this.collection;
         }

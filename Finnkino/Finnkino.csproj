@@ -55,12 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="APIGateway.cs" />
     <Compile Include="Area.cs" />
+    <Compile Include="FinnkinoAPI.cs" />
     <Compile Include="MovieCollection.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="MovieBox.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="Show.cs" />
+    <Compile Include="Shows.cs" />
     <Compile Include="Sorter.cs" />
+    <Compile Include="XMLEventImageMedium.cs" />
+    <Compile Include="XMLMankeli.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

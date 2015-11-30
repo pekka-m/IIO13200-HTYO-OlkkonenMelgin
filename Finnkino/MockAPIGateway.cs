@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Finnkino
 {
-    public class MockAPIGateway : IAPIGateway
+    public class MockAPIGateway
     {
-        public List<MovieBox> getMovies(int theatre)
+        /*
+        public List<MovieBox> getMovies(int theatre, DateTime day)
         {
 
             List<MovieBox> movies = new List<MovieBox>();
@@ -81,5 +82,6 @@ namespace Finnkino
         {
             return new List<Show>();
         }
+        */
     }
 }

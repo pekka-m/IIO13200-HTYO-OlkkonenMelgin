@@ -29,9 +29,9 @@
                                 <ItemsControl ItemsSource="{Binding Movies}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border CornerRadius="6" BorderBrush="Black" Background="LightCoral" BorderThickness="2" Margin="5">
-                                                <StackPanel Orientation="Vertical" Width="100" Height="160">
-                                                    <TextBlock Text="{Binding ImagePath}" Margin="3" Width="100" TextWrapping="Wrap" />
+                                            <Border CornerRadius="6" BorderBrush="Black" Background="Black" BorderThickness="2" Margin="5">
+                                                <StackPanel Orientation="Vertical" Width="100">
+                                                    <Image Stretch="UniformToFill" Source="{Binding Images.EventMediumImagePortrait}" Margin="3" />
                                                 </StackPanel>
                                             </Border>
                                         </DataTemplate>

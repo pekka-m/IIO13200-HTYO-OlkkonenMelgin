@@ -8,7 +8,7 @@ namespace Finnkino
 {
     public interface IAPIGateway
     {
-        List<MovieBox> getMovies(int theatre);
+        Schedule getMovies(int theatre, DateTime day);
         List<Area> getAreas();
         List<string> getAuditoriums(int area);
         Movie getMovieDetails(MovieBox movieBox);
