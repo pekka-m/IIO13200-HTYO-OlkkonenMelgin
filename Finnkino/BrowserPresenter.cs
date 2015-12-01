@@ -49,7 +49,7 @@ namespace Finnkino
 
         public List<Area> getAreas()
         {
-            return this.APIGateway.getAreas();
+            return this.APIGateway.getAreas().TheatreArea;
         }
 
         public List<string> getAuditoriums(int area)

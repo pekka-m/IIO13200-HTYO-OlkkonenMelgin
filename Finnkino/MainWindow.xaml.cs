@@ -37,6 +37,7 @@ namespace Finnkino
             Debug.WriteLine("SSASSISISSUSUSEESSLSS", CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern);
             Debug.WriteLine("SSASSISISSUSUSEESSLSS", CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern);
 
+            
             this.initializeFilters();          
             
             IAPIGateway gateway = new APIGateway();

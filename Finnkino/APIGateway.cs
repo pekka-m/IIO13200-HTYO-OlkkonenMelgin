@@ -8,21 +8,20 @@ namespace Finnkino
 {
     public class APIGateway : IAPIGateway
     {
+
+        public FinnkinoAPI finnkinoApi { get; set; }
+        public APIGateway() {
+            finnkinoApi = new FinnkinoAPI();
+        }
         public Schedule getMovies(int theatre, DateTime day)
         {
-            List<MovieBox> movies = new List<MovieBox>();
-
-            FinnkinoAPI api = new FinnkinoAPI();
-            return api.getMovies(theatre, day);
+        
+            return finnkinoApi.getMovies(theatre, day);
         }
 
-        public List<Area> getAreas()
+        public TheatreAreas getAreas()
         {
-            List<Area> areas = new List<Area>();
-            areas.Add(new Area(1015, "Jyväskylä"));
-            areas.Add(new Area(1033, "Helsinki: Tennispalatsi"));
-            areas.Add(new Area(1038, "Espoo: Sello"));
-            return areas;
+            return finnkinoApi.getAreas();
         }
 
         public List<string> getAuditoriums(int area)

@@ -9,7 +9,7 @@ namespace Finnkino
     public interface IAPIGateway
     {
         Schedule getMovies(int theatre, DateTime day);
-        List<Area> getAreas();
+        TheatreAreas getAreas();
         List<string> getAuditoriums(int area);
         Movie getMovieDetails(int eventId, int area, string date);
         List<Show> getMovieSchedules(MovieBox movieBox);
