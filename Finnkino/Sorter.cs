@@ -13,6 +13,7 @@ namespace Finnkino
         private List<MovieBox> movieBoxList;
         private List<DateTime> dateList;
         private ObservableCollection<MovieCollection> movieCollectionList; //kuvat järjestetty päivittäin collectioneihin (oikea data)
+        private List<int> eventIds;
 
         public ObservableCollection<MovieCollection> sortByDay(Schedule schedule)
         {
@@ -72,18 +73,25 @@ namespace Finnkino
         //ja siirrytään datelistassa seuraavaan päivään
         private void setMovieCollectionList()
         {
+            this.eventIds = new List<int>();
             this.movieCollectionList = new ObservableCollection<MovieCollection>();
             int dateListIndex = 0;
             List<MovieBox> movieBoxListTemp = new List<MovieBox>();
             MovieCollection movieCollectionTemp = new MovieCollection();
             Debug.WriteLine("tehään uus temppilista");
             int i;
+            this.eventIds.Add(this.movieBoxList[0].EventID);
+            movieBoxListTemp.Add(this.movieBoxList[0]);
             for (i = 0; i < this.movieBoxList.Count; i++)
             {
                 if (dateToString(this.movieBoxList[i].getShowStart()) == dateToString(this.dateList[dateListIndex]))
                 {
-                    movieBoxListTemp.Add(this.movieBoxList[i]);
-                    Debug.WriteLine("Lisätään listaan eventti: " + this.movieBoxList[i].EventID.ToString());
+                    if (!this.eventIds.Contains(this.movieBoxList[i].EventID))
+                    {
+                        movieBoxListTemp.Add(this.movieBoxList[i]);
+                        this.eventIds.Add(this.movieBoxList[i].EventID);
+                        Debug.WriteLine("Lisätään listaan eventti: " + this.movieBoxList[i].EventID.ToString());
+                    }
                 }
                 else
                 {
@@ -97,6 +105,8 @@ namespace Finnkino
                     movieBoxListTemp.Add(this.movieBoxList[i]);
                     //Debug.WriteLine("Lisätään listaan eventti: " + this.movieBoxList[i].EventId.ToString());
                     dateListIndex++;
+                    this.eventIds.Clear();
+                    this.eventIds.Add(this.movieBoxList[i].EventID);
                 }
             }
 

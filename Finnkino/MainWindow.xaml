@@ -25,7 +25,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Path=Day, StringFormat=dd/MM/yyyy}" />
+                                <TextBlock Text="{Binding Path=Day, StringFormat=dddd dd/MM/yyyy}" />
                                 <ItemsControl ItemsSource="{Binding Movies}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>

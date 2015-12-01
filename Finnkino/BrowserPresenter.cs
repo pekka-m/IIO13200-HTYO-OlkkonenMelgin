@@ -12,8 +12,8 @@ namespace Finnkino
     {
         private IAPIGateway APIGateway;
         private ObservableCollection<MovieCollection> movieCollectionList; //kuvat järjestetty päivittäin collectioneihin (oikea data)
-        private List<DateTime> dateList;
-        private List<MovieBox> movieBoxList;
+        //private List<DateTime> dateList;
+        //private List<MovieBox> movieBoxList;
 
         public BrowserPresenter(IAPIGateway APIGateway)
         {
@@ -32,7 +32,7 @@ namespace Finnkino
             }
             else
             {
-                date = DateTime.ParseExact(filters["Day"], "d.M.yyyy HH:mm:ss", null);
+                date = DateTime.ParseExact(filters["Day"], "d.M.yyyy H:mm:ss", null);
             }
 
             this.movieCollectionList = sorter.sortByDay(this.APIGateway.getMovies(theatre, date));

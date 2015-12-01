@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,10 @@ namespace Finnkino
         public MainWindow()
         {
             InitializeComponent();
+
+            Debug.WriteLine("SSASSISISSUSUSEESSLSS", CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern);
+            Debug.WriteLine("SSASSISISSUSUSEESSLSS", CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern);
+
             this.initializeFilters();          
             
             IAPIGateway gateway = new APIGateway();
@@ -90,6 +95,7 @@ namespace Finnkino
             this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
             BrowserIC.ItemsSource = this.collection;
         }
+
         private void button_filter_Click(object sender, RoutedEventArgs e)
         {
             if (checkBox_allDays.IsChecked == true)
@@ -101,10 +107,42 @@ namespace Finnkino
                 filters["Day"] = comboBox_Sort.SelectedValue.ToString();
             }
             //Debug.WriteLine("JASDJFASJFDJASFJASJ" + filters["Day"]);
+
+            this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
+            BrowserIC.ItemsSource = this.collection;
+            /*
+            Task task = new Task(new Action(getMoviesTask));
+            task.Start();
+            */
+        }
+        /*
+        private async Task<int> gettaaMooviet()
+        {
             this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
             BrowserIC.ItemsSource = this.collection;
         }
+        */
+        /*
+        private async Task<int> getMoviesTask()
+        {
+            Task<ObservableCollection<MovieCollection>> joku = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
 
+            this.collection = await joku;
+
+
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+
+                Task< ObservableCollection < MovieCollection >> joku = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
+
+                this.collection = await joku;
+
+                //this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
+                BrowserIC.ItemsSource = this.collection;
+             
+            }));
+        }
+        */
         private void initializeFilters()
         {
             this.filters = new Dictionary<string, string>();
@@ -154,7 +192,7 @@ namespace Finnkino
                 Debug.WriteLine(DateTime.Now.AddDays(i));
             }
             comboBox_Sort.ItemsSource = this.dates;
-            comboBox_Sort.ItemStringFormat = "ddd dd.MM";
+            comboBox_Sort.ItemStringFormat = "dddd dd.MM";
         }
 
     }

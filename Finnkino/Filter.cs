@@ -14,7 +14,7 @@ namespace Finnkino
         {
             if (day != "Kaikki")
             {
-                DateTime date = DateTime.ParseExact(day, "d.M.yyyy HH:mm:ss", null);
+                DateTime date = DateTime.ParseExact(day, "d.M.yyyy H:mm:ss", null);
                 for (int i = collection.Count - 1; i >= 0; i--)
                 {
                     if (String.Format("{0:dd.MM}", collection[i].Day) != String.Format("{0:dd.MM}", date))
