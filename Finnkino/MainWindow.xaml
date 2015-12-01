@@ -31,7 +31,12 @@
                                         <DataTemplate>
                                             <Border CornerRadius="6" BorderBrush="Black" Background="Black" BorderThickness="2" Margin="5">
                                                 <StackPanel Orientation="Vertical" Width="100">
-                                                    <Image Stretch="UniformToFill" Source="{Binding Images.EventMediumImagePortrait}" Margin="3" />
+                                                    <Button Name="cmdCommand" Click="Button_Clicked">
+                                                        <StackPanel>
+                                                            <Image Stretch="UniformToFill" Source="{Binding Images.EventMediumImagePortrait}" Margin="3" />
+                                                            <TextBlock x:Name="eventtiId" Text="{Binding EventID}" />
+                                                        </StackPanel>
+                                                    </Button>
                                                 </StackPanel>
                                             </Border>
                                         </DataTemplate>

@@ -194,6 +194,20 @@ namespace Finnkino
             comboBox_Sort.ItemsSource = this.dates;
             comboBox_Sort.ItemStringFormat = "dddd dd.MM";
         }
+        private void Button_Clicked(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var parent = button.Parent as FrameworkElement;
+            var textBlock = parent.FindName("eventtiId") as TextBlock;
+            //Debug.WriteLine("TÄÄ ON BUTTONIN ID" + textBlock.Text.ToString());
 
+            MovieDetails movieDetails = new MovieDetails(
+                int.Parse(textBlock.Text.ToString()),
+                int.Parse(comboBox_Area.SelectedValue.ToString()),
+                comboBox_Sort.SelectedItem.ToString()
+                );
+            movieDetails.Owner = this;
+            movieDetails.Show();
+        }
     }
 }

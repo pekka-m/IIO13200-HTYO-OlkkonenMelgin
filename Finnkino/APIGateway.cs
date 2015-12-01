@@ -44,8 +44,9 @@ namespace Finnkino
             return auditoriums;
         }
 
-        public Movie getMovieDetails(MovieBox movieBox)
+        public Movie getMovieDetails(int eventId, int area, string date)
         {
+
             return new Movie();
         }
 
