@@ -23,7 +23,7 @@ namespace Finnkino
         private MovieDetailsPresenter presenter;
         private Movie movie;
 
-        public MovieDetails(int eventId, int area, string date)
+        public MovieDetails(int eventId, int area, string date, string movieTitle)
         {
             InitializeComponent();
 
@@ -33,11 +33,12 @@ namespace Finnkino
             //string format = "d.M.yyyy " + CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
             //DateTime _date = DateTime.ParseExact(date, format, null);
 
-            this.movie = this.presenter.getMovieDetails(eventId, area, date);
+            this.movie = this.presenter.getMovieDetails(eventId, area, date, movieTitle);
 
             textBlock_Title.Text = movie.Title.ToString();
             textBlock_Genres.Text = movie.Genres;
             textBlock3.Text = movie.Synopsis;
+            textBlock_Rating.Text = movie.Rating;
             comboBox.ItemsSource = movie.Shows;
             backgroundImage.ImageSource = new BitmapImage(new Uri(movie.ImageBackground));
         }

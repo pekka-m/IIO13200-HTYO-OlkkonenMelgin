@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Finnkino.DataAccess;
 
 namespace Finnkino
 {
@@ -10,12 +11,14 @@ namespace Finnkino
     {
 
         public FinnkinoAPI finnkinoApi { get; set; }
+        public OmdbAPI ratingsAPI { get; set; }
         public APIGateway() {
             finnkinoApi = new FinnkinoAPI();
+            ratingsAPI = new OmdbAPI();
+            
         }
         public Schedule getMovies(int theatre, DateTime day)
         {
-        
             return finnkinoApi.getMovies(theatre, day);
         }
 
@@ -24,33 +27,19 @@ namespace Finnkino
             return finnkinoApi.getAreas();
         }
 
-        public List<string> getAuditoriums(int area)
-        {
-            List<string> auditoriums = new List<string>();
-            auditoriums.Add("Kaikki");
-            if (area == 1015)
-            {
-                auditoriums.Add("Fantasia 1");
-                auditoriums.Add("Fantasia 2");
-                auditoriums.Add("Fantasia 3");
-                auditoriums.Add("Fantasia 4");
-                auditoriums.Add("Fantasia 5");
-            }
-            else
-            {
-                auditoriums.Add("Sali X");
-            }
-            return auditoriums;
-        }
 
-        public Movie getMovieDetails(int eventId, int area, string date)
+
+        public Movie getMovieDetails(int eventId, int area, string date, string movieTitle)
         {
             Schedule movies = finnkinoApi.getMovieDetails(eventId, area, date);
+            string rating = ratingsAPI.getMovieRating(movieTitle);
+           // string rating = omdbAPI.getMovieRating(movieTitle);
             Movie movie = movies.Shows[0].Show[0];
             string[] jotain = finnkinoApi.getSynopsis(eventId);
             movie.Synopsis = jotain[0];
             movie.ImageBackground = jotain[1];
             movie.Shows = new List<Show>();
+            movie.Rating = rating;
             for (int i = 0; i < movies.Shows[0].Show.Count; i++)
             {
                 Show show = new Show();
@@ -64,9 +53,5 @@ namespace Finnkino
             return movie;
         }
 
-        public List<Show> getMovieSchedules(Movie movieBox)
-        {
-            return new List<Show>();
-        }
     }
 }

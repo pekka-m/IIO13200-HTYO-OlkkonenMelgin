@@ -16,13 +16,13 @@ namespace Finnkino
             this.APIGateway = gateway; 
         }
 
-        public Movie getMovieDetails(int eventId, int area, string date)
+        public Movie getMovieDetails(int eventId, int area, string date, string movieTitle)
         {
 
             DateTime day = DateTime.ParseExact(date, "yyyy-MM-dd'T'HH:mm:ss", null);
 
             //Movie movie = APIGateway.getMovieDetails(eventId, area, day.ToString("dd.MM.yyyy"));
-            return APIGateway.getMovieDetails(eventId, area, day.ToString("dd.MM.yyyy"));
+            return APIGateway.getMovieDetails(eventId, area, day.ToString("dd.MM.yyyy"), movieTitle);
         }
     }
 }

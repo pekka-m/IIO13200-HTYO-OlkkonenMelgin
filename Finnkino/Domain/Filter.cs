@@ -66,5 +66,46 @@ namespace Finnkino
                 }
             }
         }
+
+        public void filterByAuditorium(ObservableCollection<MovieCollection> collection, string auditoriumName)
+        {
+            if (auditoriumName != "Kaikki")
+            {
+                for (int i = collection.Count - 1; i >= 0; i--)
+                {
+                    for (int j = collection[i].Movies.Count - 1; j >= 0; j--)
+                    {
+                        if (!collection[i].Movies[j].TheatreAuditorium.Equals(auditoriumName))
+                        {
+                            collection[i].Movies.RemoveAt(j);
+                        }
+                    }
+                    if (collection[i].Movies.Count == 0)
+                    {
+                        collection.RemoveAt(i);
+                    }
+                }
+            }
+        }
+        public List<string> getTheaterAuditoriums(ObservableCollection<MovieCollection> collection) {
+
+            List<string> auditoriums = new List<string>();
+
+            //mennään jokanen päivä läpi
+            for (int i = 0; i < collection.Count; i++)
+            {
+                //mennään päivän jokanen leffa läpi
+                for (int j = 0; j < collection.ElementAt(i).Movies.Count; j++)
+                {
+                    // jos lista ei sisällä teatterin nimeä
+                    // niin lisätään se sinne
+                    if (!auditoriums.Contains(collection.ElementAt(i).Movies[j].TheatreAuditorium))
+                    {
+                        auditoriums.Add(collection.ElementAt(i).Movies[j].TheatreAuditorium);
+                    }
+                }
+            }
+            return auditoriums;
+        }
     }
 }

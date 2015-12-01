@@ -93,5 +93,30 @@ namespace Finnkino
             return result;
         }
 
+        public string mankeloiRatings(string url)
+        {
+            WebRequest request = WebRequest.Create(url);
+            ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
+            request.Proxy = null;
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            using (XmlReader reader = XmlReader.Create(new StreamReader(stream)))
+            {
+                while (reader.Read())
+                {
+                    switch(reader.Name)
+                    {
+                        case "movie":
+                            string rating = reader.GetAttribute("imdbRating");
+                            response.Close();
+                            return rating;
+                    }
+                   
+                }
+            }
+            response.Close();
+            return null;
+        }
+
     }
 }

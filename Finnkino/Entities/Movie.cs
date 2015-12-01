@@ -30,6 +30,9 @@ namespace Finnkino
         public string TheatreAuditorium { get; set; }
 
         [XmlElement]
+        public string Theatre { get; set; }
+
+        [XmlElement]
         public string Genres { get; set; }
         
         [XmlElement("Images")]

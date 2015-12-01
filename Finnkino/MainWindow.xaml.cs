@@ -29,20 +29,29 @@ namespace Finnkino
         List<DateTime> dates;
         ObservableCollection<MovieCollection> collection;
         Dictionary<string, string> filters;
+        List<string> TheaterAuditoriums;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            Debug.WriteLine("SSASSISISSUSUSEESSLSS", CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern);
-            Debug.WriteLine("SSASSISISSUSUSEESSLSS", CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern);
-
-            
             this.initializeFilters();          
             
             IAPIGateway gateway = new APIGateway();
             this.presenter = new BrowserPresenter(gateway);
             comboBox_Area.ItemsSource = this.presenter.getAreas();
+            TheaterAuditoriums = new List<string>();
+        }
+
+
+
+        private void clearAuditoriumList()
+        {
+            if (this.TheaterAuditoriums.Count > 0)
+            {
+                this.TheaterAuditoriums.Clear();
+                comboBox_Filter_Auditorium.ItemsSource = null;
+            }
+
         }
 
         private void comboBox_Area_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,8 +59,9 @@ namespace Finnkino
             Debug.WriteLine("valittu area / teatteri id: " + comboBox_Area.SelectedValue.ToString());
             //this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
             //BrowserIC.ItemsSource = this.collection;
-            comboBox_Filter_Auditorium.ItemsSource = this.presenter.getAuditoriums(int.Parse(comboBox_Area.SelectedValue.ToString()));
-            comboBox_Filter_Auditorium.SelectedIndex = 0;
+            this.clearAuditoriumList();
+            
+
         }
 
         private void comboBox_Filter_Genre_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,6 +98,7 @@ namespace Finnkino
             {
                 filters["Day"] = comboBox_Sort.SelectedValue.ToString();
             }
+            this.clearAuditoriumList();
         }
 
         private void button_clearDay_Click(object sender, RoutedEventArgs e)
@@ -99,6 +110,7 @@ namespace Finnkino
 
         private void button_filter_Click(object sender, RoutedEventArgs e)
         {
+
             if (checkBox_allDays.IsChecked == true)
             {
                 filters["Day"] = "Kaikki";
@@ -107,43 +119,23 @@ namespace Finnkino
             {
                 filters["Day"] = comboBox_Sort.SelectedValue.ToString();
             }
-            //Debug.WriteLine("JASDJFASJFDJASFJASJ" + filters["Day"]);
-
+           
             this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
             BrowserIC.ItemsSource = this.collection;
-            /*
-            Task task = new Task(new Action(getMoviesTask));
-            task.Start();
-            */
+
+            if (TheaterAuditoriums.Count == 0) {
+
+            TheaterAuditoriums = this.presenter.getAuditoriums();
+            comboBox_Filter_Auditorium.ItemsSource = TheaterAuditoriums;
+            comboBox_Filter_Auditorium.SelectedIndex = 0;
+            }
+
+
+
+
+
         }
-        /*
-        private async Task<int> gettaaMooviet()
-        {
-            this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
-            BrowserIC.ItemsSource = this.collection;
-        }
-        */
-        /*
-        private async Task<int> getMoviesTask()
-        {
-            Task<ObservableCollection<MovieCollection>> joku = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
 
-            this.collection = await joku;
-
-
-            this.Dispatcher.Invoke((Action)(() =>
-            {
-
-                Task< ObservableCollection < MovieCollection >> joku = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
-
-                this.collection = await joku;
-
-                //this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
-                BrowserIC.ItemsSource = this.collection;
-             
-            }));
-        }
-        */
         private void initializeFilters()
         {
             this.filters = new Dictionary<string, string>();
@@ -201,12 +193,14 @@ namespace Finnkino
             var parent = button.Parent as FrameworkElement;
             var textBlockEventId = parent.FindName("eventtiId") as TextBlock;
             var textBlockDay = parent.FindName("day") as TextBlock;
+            var textBlockTitle = parent.FindName("textBlock_Title") as TextBlock;
             //Debug.WriteLine("TÄÄ ON BUTTONIN ID" + textBlock.Text.ToString());
 
             MovieDetails movieDetails = new MovieDetails(
                 int.Parse(textBlockEventId.Text.ToString()),
                 int.Parse(comboBox_Area.SelectedValue.ToString()),
-                textBlockDay.Text.ToString()
+                textBlockDay.Text.ToString(),
+                textBlockTitle.Text
                 );
             movieDetails.Owner = this;
             movieDetails.Show();

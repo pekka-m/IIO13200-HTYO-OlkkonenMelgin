@@ -10,8 +10,7 @@ namespace Finnkino
     {
         Schedule getMovies(int theatre, DateTime day);
         TheatreAreas getAreas();
-        List<string> getAuditoriums(int area);
-        Movie getMovieDetails(int eventId, int area, string date);
-        List<Show> getMovieSchedules(Movie movieBox);
+        Movie getMovieDetails(int eventId, int area, string date, string movieTitle);
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -15,13 +15,50 @@ namespace Finnkino
         private ObservableCollection<MovieCollection> movieCollectionList; //kuvat järjestetty päivittäin collectioneihin (oikea data)
         private List<int> eventIds;
 
+        private void setShowSchedules() {
+            // mennään moviecollection lista läpi
+            ObservableCollection<MovieCollection> tempCollection = new ObservableCollection<MovieCollection>();
+          
+            for (int i = 0; i < movieCollectionList.Count; i++)
+            {
+
+                // haetaan yksittäinen moviecollectionlista
+                MovieCollection colletion = movieCollectionList.ElementAt(i);
+                // käydään sen leffat läpi
+                for (int j = 0; j < colletion.Movies.Count ; j++)
+                {
+                    Movie leffa = colletion.Movies[j];
+                    int leffanId = leffa.EventID;
+                    // si tsekataan kaikki ne movieboxlistan leffat läpi ja verrataa onko sama event id
+                    for (int q = 0; q < movieBoxList.Count; q++)
+                    {
+                        // jos on sama eventid, niin sitten tehdään uus show ja lisätään se takasin jonnekki
+                        if (leffanId == movieBoxList[q].EventID) {
+                            // lisätään siihen sen leffan sali
+                            Show show = new Show();
+                            show.Auditorium = movieBoxList[q].TheatreAuditorium;
+                            // lisätään showit takasin leffaan
+                            // koska referenssit niin toimii
+                            // eli lisää sinne moviecollectionlistiin ne showit
+                            leffa.Shows.Add(show);
+                        }
+                       
+                    }
+                }
+            }
+
+        }
+
         public ObservableCollection<MovieCollection> sortByDay(Schedule schedule)
         {
             //movies.Sort((x, y) => DateTime.Compare(DateTime.ParseExact(x.ShowStart, "yyyy-MM-dd'T'HH:mm:ss", null), DateTime.ParseExact(y.ShowStart, "yyyy-MM-dd'T'HH:mm:ss", null)));
             //return movies;
+            
 
+            // jos löytyy leffoja niin sitten
             if (schedule.Shows[0].Show.Count > 0)
             {
+                // sisältää kaikki  leffat siis movie boxi sisältää
                 this.movieBoxList = schedule.Shows[0].Show;
                 //setataan kaikki showpäivät
                 this.setDateList();
@@ -32,6 +69,7 @@ namespace Finnkino
                 //- List<MovieBox>
                 //jokaisessa MovieCollectionissa on yhden päivän movieboxit
                 this.setMovieCollectionList();
+                this.setShowSchedules();
 
                 //nullataan kaikki mitä ei enää tarvita
                 this.dateList = null;

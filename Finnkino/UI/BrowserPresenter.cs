@@ -10,6 +10,7 @@ namespace Finnkino
 {
     public class BrowserPresenter
     {
+        private Filter filter;
         private IAPIGateway APIGateway;
         private ObservableCollection<MovieCollection> movieCollectionList; //kuvat järjestetty päivittäin collectioneihin (oikea data)
         //private List<DateTime> dateList;
@@ -18,13 +19,13 @@ namespace Finnkino
         public BrowserPresenter(IAPIGateway APIGateway)
         {
             this.APIGateway = APIGateway;
+            filter = new Filter();
         }
 
         public ObservableCollection<MovieCollection> getMovies(int theatre, Dictionary<string, string> filters)
         {
             //järjestetään kaikki movieboxit showdaten mukaan nousevaan järjestykseen
             Sorter sorter = new Sorter();
-            Filter filter = new Filter();
             DateTime date;
             if (filters["Day"] == "Kaikki")
             {
@@ -34,8 +35,13 @@ namespace Finnkino
             {
                 date = DateTime.ParseExact(filters["Day"], "d.M.yyyy H:mm:ss", null);
             }
+            // tässä on kaikki ne leffat
+            Schedule schedule = this.APIGateway.getMovies(theatre: theatre, day: date);
+            // kun täältä tulee ne leffat niin niissä pitää olla ne showssit lisättynä
+            this.movieCollectionList = sorter.sortByDay(schedule);
 
-            this.movieCollectionList = sorter.sortByDay(this.APIGateway.getMovies(theatre, date));
+
+            // lisää jokaseen 
             sorter = null;
 
             
@@ -43,6 +49,7 @@ namespace Finnkino
             filter.filterByDay(movieCollectionList, filters["Day"]);
             filter.filterByGenre(movieCollectionList, filters["Genre"]);
             filter.filterByAgeLimit(movieCollectionList, filters["AgeLimit"]);
+            filter.filterByAuditorium(movieCollectionList, filters["Auditorium"]);
 
             return this.movieCollectionList;
         }
@@ -52,9 +59,11 @@ namespace Finnkino
             return this.APIGateway.getAreas().TheatreArea;
         }
 
-        public List<string> getAuditoriums(int area)
+
+       
+        public List<string> getAuditoriums()
         {
-            return this.APIGateway.getAuditoriums(area);
+          return filter.getTheaterAuditoriums(movieCollectionList);
         }
 
         
