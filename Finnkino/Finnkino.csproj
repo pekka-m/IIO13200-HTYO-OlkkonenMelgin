@@ -65,6 +65,7 @@
     <Compile Include="Show.cs" />
     <Compile Include="Shows.cs" />
     <Compile Include="Sorter.cs" />
+    <Compile Include="TheatreAreas.cs" />
     <Compile Include="XMLEventImageMedium.cs" />
     <Compile Include="XMLMankeli.cs" />
     <Page Include="MainWindow.xaml">
