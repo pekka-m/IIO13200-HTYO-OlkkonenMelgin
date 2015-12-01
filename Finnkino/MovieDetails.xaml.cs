@@ -35,9 +35,16 @@ namespace Finnkino
 
             this.movie = this.presenter.getMovieDetails(eventId, area, date);
 
-            textBlock.Text = movie.EventID.ToString();
-            textBlock2.Text = movie.TheatreAuditorium;
+            textBlock_Title.Text = movie.Title.ToString();
+            textBlock_Genres.Text = movie.Genres;
             textBlock3.Text = movie.Synopsis;
+            comboBox.ItemsSource = movie.Shows;
+            backgroundImage.ImageSource = new BitmapImage(new Uri(movie.ImageBackground));
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.finnkino.fi/Websales/Show/" + movie.Shows[comboBox.SelectedIndex].Id);
         }
     }
 }

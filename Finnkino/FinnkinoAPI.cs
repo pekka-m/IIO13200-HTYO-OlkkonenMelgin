@@ -22,9 +22,9 @@ namespace Finnkino
             return this.mankeli.mankeloiMovies("http://www.finnkino.fi/xml/Schedule/?area=" + area + "&eventID=" + eventId + "&dt=" + date);
         }
 
-        public string getSynopsis(int eventId)
+        public string[] getSynopsis(int eventId)
         {
-            return this.mankeli.mankeloiSynopsis("http://www.finnkino.fi/xml/Events/?eventID=" + eventId);
+            return this.mankeli.mankeloiSynopsis("http://www.finnkino.fi/xml/Events/?includeGallery=true&eventID=" + eventId);
         }
 
         public Schedule getMovies(int theatre, DateTime day)

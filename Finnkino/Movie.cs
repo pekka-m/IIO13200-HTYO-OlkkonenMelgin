@@ -44,12 +44,17 @@ namespace Finnkino
         [XmlElement]
         public string dttmShowEnd{ get; set; }
 
+        [XmlElement("ID")]
+        public string ShowID { get; set; }
+
         [XmlElement]
         public int TheatreID { get; set; }
 
         public string Synopsis { get; set; }
 
         public List<Show> Shows { get; set; }
+
+        public string ImageBackground { get; set; }
 
         public string[] getGenres()
         {

@@ -50,8 +50,10 @@ namespace Finnkino
             return result;
         }
 
-        public string mankeloiSynopsis(string url)
+        public string[] mankeloiSynopsis(string url)
         {
+            string[] result = new string[2];
+            result[0] = "";
             WebRequest request = WebRequest.Create(url);
             ((HttpWebRequest)request).UserAgent = "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36";
             request.Proxy = null;
@@ -61,18 +63,34 @@ namespace Finnkino
             {
                 while (reader.Read())
                 {
-                    //Debug.WriteLine("SDFASDFASDFASDFASD" + reader.ReadAttributeValue().ToString());
-                    if(reader.Name == "ShortSynopsis")
+                    bool lopeta = false;
+                    Debug.WriteLine("SDFASDFASDFASDFASD" + reader.Value.ToString());
+                    switch (reader.Name)
                     {
-                        reader.Read();
-                        //reader.MoveToNextAttribute();
-                        response.Close();
-                        return reader.Value.ToString();
+                        case "ShortSynopsis":
+                            if (result[0].Equals(""))
+                            {
+                                reader.Read();
+                                result[0] = reader.Value.ToString();
+                            }
+                            break;
+                        case "GalleryImage":
+                            reader.Read();
+                            reader.Read();
+                            reader.Read();
+                            reader.Read();
+                            reader.Read();
+                            result[1] = reader.Value.ToString();
+                            lopeta = true;
+                            break;
+                        default:
+                            break;
                     }
+                    if (lopeta == true) break;
                 }
             }
             response.Close();
-            return null;
+            return result;
         }
 
     }

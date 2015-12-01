@@ -47,11 +47,14 @@ namespace Finnkino
         {
             Schedule movies = finnkinoApi.getMovieDetails(eventId, area, date);
             Movie movie = movies.Shows[0].Show[0];
-            movie.Synopsis = finnkinoApi.getSynopsis(eventId);
+            string[] jotain = finnkinoApi.getSynopsis(eventId);
+            movie.Synopsis = jotain[0];
+            movie.ImageBackground = jotain[1];
             movie.Shows = new List<Show>();
             for (int i = 0; i < movies.Shows[0].Show.Count; i++)
             {
                 Show show = new Show();
+                show.Id = int.Parse(movies.Shows[0].Show[i].ShowID);
                 show.Auditorium = movies.Shows[0].Show[i].TheatreAuditorium;
                 show.ShowStart = DateTime.ParseExact(movies.Shows[0].Show[i].dttmShowStart, "yyyy-MM-dd'T'HH:mm:ss", null);
                 show.ShowEnd = DateTime.ParseExact(movies.Shows[0].Show[i].dttmShowEnd, "yyyy-MM-dd'T'HH:mm:ss", null);

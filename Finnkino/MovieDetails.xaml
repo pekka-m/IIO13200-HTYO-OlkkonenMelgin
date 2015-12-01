@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Finnkino"
         mc:Ignorable="d"
-        Title="MovieDetails" Height="300" Width="300"
-        WindowStartupLocation="CenterOwner">
+        Title="MovieDetails" Height="600" Width="800"
+        WindowStartupLocation="CenterOwner"
+        Background="Black">
     <Grid>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="84,80,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="84,100,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="84,120,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" x:Name="backgroundImage" Opacity="0.5" />
+        </Grid.Background>
+        <TextBlock x:Name="textBlock_Title" Foreground="White" FontSize="24" HorizontalAlignment="Right" Margin="20,260,20,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Genres" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,300,20,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock3" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,323,20,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Tickets" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,0,20,75" TextWrapping="Wrap" Text="Osta liput:" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="comboBox" DisplayMemberPath="ShowableString" HorizontalAlignment="Left" Margin="440,0,0,50" VerticalAlignment="Bottom" Width="160" SelectionChanged="comboBox_SelectionChanged"/>
     </Grid>
 </Window>

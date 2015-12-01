@@ -12,6 +12,6 @@ namespace Finnkino
         public string Auditorium { get; set; }
         public DateTime ShowStart { get; set; }
         public DateTime ShowEnd { get; set; }
-        public string ShowableString { get { return Auditorium + " / " + ShowStart.ToString() + " - " + ShowEnd.ToString(); } }
+        public string ShowableString { get { return Auditorium + " / " + ShowStart.ToString("HH:mm") + " - " + ShowEnd.ToString("HH:mm"); } }
     }
 }
