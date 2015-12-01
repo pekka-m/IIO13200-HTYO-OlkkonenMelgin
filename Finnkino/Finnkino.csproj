@@ -55,33 +55,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="APIGateway.cs" />
-    <Compile Include="Area.cs" />
-    <Compile Include="FinnkinoAPI.cs" />
-    <Compile Include="MovieCollection.cs" />
-    <Compile Include="Filter.cs" />
-    <Compile Include="Movie.cs" />
+    <Compile Include="DataAccess\APIGateway.cs" />
+    <Compile Include="Entities\Area.cs" />
+    <Compile Include="DataAccess\FinnkinoAPI.cs" />
+    <Compile Include="Entities\MovieCollection.cs" />
+    <Compile Include="Domain\Filter.cs" />
+    <Compile Include="Entities\Movie.cs" />
     <Compile Include="MovieDetails.xaml.cs">
       <DependentUpon>MovieDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MovieDetailsPresenter.cs" />
-    <Compile Include="Schedule.cs" />
-    <Compile Include="Show.cs" />
-    <Compile Include="Shows.cs" />
-    <Compile Include="Sorter.cs" />
-    <Compile Include="TheatreAreas.cs" />
-    <Compile Include="XMLEventImageMedium.cs" />
-    <Compile Include="XMLMankeli.cs" />
+    <Compile Include="UI\MovieDetailsPresenter.cs" />
+    <Compile Include="Entities\Schedule.cs" />
+    <Compile Include="Entities\Show.cs" />
+    <Compile Include="Entities\Shows.cs" />
+    <Compile Include="Domain\Sorter.cs" />
+    <Compile Include="Entities\TheatreAreas.cs" />
+    <Compile Include="Entities\XMLEventImageMedium.cs" />
+    <Compile Include="DataAccess\XMLMankeli.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="IAPIGateway.cs" />
+    <Compile Include="DataAccess\IAPIGateway.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BrowserPresenter.cs" />
+    <Compile Include="UI\BrowserPresenter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -92,7 +92,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MockAPIGateway.cs" />
+    <Compile Include="DataAccess\MockAPIGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -119,6 +119,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

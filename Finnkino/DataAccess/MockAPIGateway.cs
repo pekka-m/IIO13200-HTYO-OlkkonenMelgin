@@ -9,6 +9,10 @@ namespace Finnkino
 {
     public class MockAPIGateway
     {
+        // TODO Se saleittain filtteröinti vaatii sen että niihin movieboxeihin setataan ne showt heti siinä alussa kun ne haetaan näytettäväks eli se show pyörittely mikä tehtiin pitää siirtää toiseen kohtaan
+        // TODO salin mukaan filettörinti
+        // TODO  kun valitsee kaikki areat ni pitäs saaha tieto yhen eventin kaikista näytöksistä kaikkialla
+
         /*
         public List<MovieBox> getMovies(int theatre, DateTime day)
         {
