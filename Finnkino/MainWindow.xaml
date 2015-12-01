@@ -35,6 +35,7 @@
                                                         <StackPanel>
                                                             <Image Stretch="UniformToFill" Source="{Binding Images.EventMediumImagePortrait}" Margin="3" />
                                                             <TextBlock x:Name="eventtiId" Text="{Binding EventID}" />
+                                                            <TextBlock Visibility="Hidden" x:Name="day" Text="{Binding dttmShowStart}" />
                                                         </StackPanel>
                                                     </Button>
                                                 </StackPanel>

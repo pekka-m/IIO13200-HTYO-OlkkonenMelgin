@@ -45,11 +45,23 @@ namespace Finnkino
 
         public Movie getMovieDetails(int eventId, int area, string date)
         {
+            Schedule movies = finnkinoApi.getMovieDetails(eventId, area, date);
+            Movie movie = movies.Shows[0].Show[0];
+            movie.Synopsis = finnkinoApi.getSynopsis(eventId);
+            movie.Shows = new List<Show>();
+            for (int i = 0; i < movies.Shows[0].Show.Count; i++)
+            {
+                Show show = new Show();
+                show.Auditorium = movies.Shows[0].Show[i].TheatreAuditorium;
+                show.ShowStart = DateTime.ParseExact(movies.Shows[0].Show[i].dttmShowStart, "yyyy-MM-dd'T'HH:mm:ss", null);
+                show.ShowEnd = DateTime.ParseExact(movies.Shows[0].Show[i].dttmShowEnd, "yyyy-MM-dd'T'HH:mm:ss", null);
+                movie.Shows.Add(show);
+            }
 
-            return new Movie();
+            return movie;
         }
 
-        public List<Show> getMovieSchedules(MovieBox movieBox)
+        public List<Show> getMovieSchedules(Movie movieBox)
         {
             return new List<Show>();
         }

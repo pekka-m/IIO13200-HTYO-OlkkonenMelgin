@@ -12,6 +12,6 @@ namespace Finnkino
         TheatreAreas getAreas();
         List<string> getAuditoriums(int area);
         Movie getMovieDetails(int eventId, int area, string date);
-        List<Show> getMovieSchedules(MovieBox movieBox);
+        List<Show> getMovieSchedules(Movie movieBox);
     }
 }

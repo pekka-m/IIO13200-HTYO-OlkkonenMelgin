@@ -199,13 +199,14 @@ namespace Finnkino
         {
             var button = sender as Button;
             var parent = button.Parent as FrameworkElement;
-            var textBlock = parent.FindName("eventtiId") as TextBlock;
+            var textBlockEventId = parent.FindName("eventtiId") as TextBlock;
+            var textBlockDay = parent.FindName("day") as TextBlock;
             //Debug.WriteLine("TÄÄ ON BUTTONIN ID" + textBlock.Text.ToString());
 
             MovieDetails movieDetails = new MovieDetails(
-                int.Parse(textBlock.Text.ToString()),
+                int.Parse(textBlockEventId.Text.ToString()),
                 int.Parse(comboBox_Area.SelectedValue.ToString()),
-                comboBox_Sort.SelectedItem.ToString()
+                textBlockDay.Text.ToString()
                 );
             movieDetails.Owner = this;
             movieDetails.Show();

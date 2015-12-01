@@ -21,6 +21,7 @@ namespace Finnkino
     public partial class MovieDetails : Window
     {
         private MovieDetailsPresenter presenter;
+        private Movie movie;
 
         public MovieDetails(int eventId, int area, string date)
         {
@@ -29,12 +30,14 @@ namespace Finnkino
             IAPIGateway gateway = new APIGateway();
             this.presenter = new MovieDetailsPresenter(gateway);
 
-            string format = "d.M.yyyy " + CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
-            DateTime _date = DateTime.ParseExact(date, format, null);
+            //string format = "d.M.yyyy " + CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern;
+            //DateTime _date = DateTime.ParseExact(date, format, null);
 
-            textBlock.Text = eventId.ToString();
-            textBlock2.Text = area.ToString();
-            textBlock3.Text = _date.ToString();
+            this.movie = this.presenter.getMovieDetails(eventId, area, date);
+
+            textBlock.Text = movie.EventID.ToString();
+            textBlock2.Text = movie.TheatreAuditorium;
+            textBlock3.Text = movie.Synopsis;
         }
     }
 }

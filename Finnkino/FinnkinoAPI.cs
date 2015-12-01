@@ -17,6 +17,16 @@ namespace Finnkino
             this.mankeli = new XMLMankeli();
         }
 
+        public Schedule getMovieDetails(int eventId, int area, string date)
+        {
+            return this.mankeli.mankeloiMovies("http://www.finnkino.fi/xml/Schedule/?area=" + area + "&eventID=" + eventId + "&dt=" + date);
+        }
+
+        public string getSynopsis(int eventId)
+        {
+            return this.mankeli.mankeloiSynopsis("http://www.finnkino.fi/xml/Events/?eventID=" + eventId);
+        }
+
         public Schedule getMovies(int theatre, DateTime day)
         {
             string date = "dd.MM.yyyy";
@@ -36,7 +46,7 @@ namespace Finnkino
                 date = null;
             }
 
-            return this.mankeli.mankeloiMovieBox("http://www.finnkino.fi/xml/Schedule/?area=" + theatre.ToString() + date);
+            return this.mankeli.mankeloiMovies("http://www.finnkino.fi/xml/Schedule/?area=" + theatre.ToString() + date);
         }
 
         public TheatreAreas getAreas()

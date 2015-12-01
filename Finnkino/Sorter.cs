@@ -10,7 +10,7 @@ namespace Finnkino
 {
     public class Sorter
     {
-        private List<MovieBox> movieBoxList;
+        private List<Movie> movieBoxList;
         private List<DateTime> dateList;
         private ObservableCollection<MovieCollection> movieCollectionList; //kuvat järjestetty päivittäin collectioneihin (oikea data)
         private List<int> eventIds;
@@ -76,7 +76,7 @@ namespace Finnkino
             this.eventIds = new List<int>();
             this.movieCollectionList = new ObservableCollection<MovieCollection>();
             int dateListIndex = 0;
-            List<MovieBox> movieBoxListTemp = new List<MovieBox>();
+            List<Movie> movieBoxListTemp = new List<Movie>();
             MovieCollection movieCollectionTemp = new MovieCollection();
             Debug.WriteLine("tehään uus temppilista");
             int i;
@@ -100,7 +100,7 @@ namespace Finnkino
                     movieCollectionTemp.Movies = movieBoxListTemp;
                     this.movieCollectionList.Add(movieCollectionTemp);
                     movieCollectionTemp = new MovieCollection();
-                    movieBoxListTemp = new List<MovieBox>();
+                    movieBoxListTemp = new List<Movie>();
                     Debug.WriteLine("tehään uus temppilista");
                     movieBoxListTemp.Add(this.movieBoxList[i]);
                     //Debug.WriteLine("Lisätään listaan eventti: " + this.movieBoxList[i].EventId.ToString());

@@ -60,7 +60,7 @@
     <Compile Include="FinnkinoAPI.cs" />
     <Compile Include="MovieCollection.cs" />
     <Compile Include="Filter.cs" />
-    <Compile Include="MovieBox.cs" />
+    <Compile Include="Movie.cs" />
     <Compile Include="MovieDetails.xaml.cs">
       <DependentUpon>MovieDetails.xaml</DependentUpon>
     </Compile>
@@ -93,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MockAPIGateway.cs" />
-    <Compile Include="Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

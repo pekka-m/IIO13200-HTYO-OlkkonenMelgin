@@ -10,6 +10,6 @@ namespace Finnkino
     public class Shows
     {
         [XmlElement("Show")]
-        public List<MovieBox> Show { get; set; }
+        public List<Movie> Show { get; set; }
     }
 }
