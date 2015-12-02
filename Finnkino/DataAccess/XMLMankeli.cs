@@ -59,8 +59,8 @@ namespace Finnkino
             {
                 while (reader.Read())
                 {
+                    LoopCounter.loops++;
                     bool lopeta = false;
-                    Debug.WriteLine("SDFASDFASDFASDFASD" + reader.Value.ToString());
                     switch (reader.Name)
                     {
                         case "ShortSynopsis":
@@ -100,7 +100,8 @@ namespace Finnkino
             {
                 while (reader.Read())
                 {
-                    switch(reader.Name)
+                    LoopCounter.loops++;
+                    switch (reader.Name)
                     {
                         case "movie":
                             string rating = reader.GetAttribute("imdbRating");

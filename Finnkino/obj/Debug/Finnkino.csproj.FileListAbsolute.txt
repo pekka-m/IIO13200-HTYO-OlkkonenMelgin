@@ -40,7 +40,6 @@ D:\H3173\netharkka\Finnkino\obj\Debug\MainWindow.baml
 D:\H3173\netharkka\Finnkino\obj\Debug\Finnkino.g.resources
 D:\H3173\netharkka\Finnkino\obj\Debug\Finnkino.Properties.Resources.resources
 D:\H3173\netharkka\Finnkino\obj\Debug\Finnkino.csproj.GenerateResource.Cache
-D:\H3173\netharkka\Finnkino\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\H3173\netharkka\Finnkino\obj\Debug\MovieDetails.g.cs
 D:\H3173\netharkka\Finnkino\obj\Debug\MovieDetails.baml
 D:\Users\Pekka\Documents\GitHub\netharkka\Finnkino\obj\Debug\MovieDetails.g.cs

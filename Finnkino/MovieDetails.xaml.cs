@@ -27,13 +27,14 @@ namespace Finnkino
 
             textBlock_Title.Text = movie.Title.ToString();
             textBlock_Genres.Text = movie.Genres;
+            textBlock_Length.Text = movie.LengthInMinutes.ToString() + " min";
             textBlock3.Text = movie.Synopsis;
             textBlock_Rating.Text = movie.Rating;
             comboBox.ItemsSource = movie.Shows;
             backgroundImage.ImageSource = new BitmapImage(new Uri(movie.ImageBackground));
         }
 
-        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void button_Tickets_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.finnkino.fi/Websales/Show/" + movie.Shows[comboBox.SelectedIndex].Id);
         }

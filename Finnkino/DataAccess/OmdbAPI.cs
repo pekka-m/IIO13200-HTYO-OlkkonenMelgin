@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Finnkino.DataAccess
@@ -21,22 +22,14 @@ namespace Finnkino.DataAccess
         // TODO ei toimi ihan täysin jos on 3D stringissä, toisin sanoen ei poista niitä
         private string formatMovieTitle(string title)
         {
-            string[] splitted = title.Split(' ');
-            List<string> stripped = new List<string>();
-            string formattedTitle="";
-            for (int i = 0; i < splitted.Length; i++)
+            string formattedTitle =  Regex.Replace(title, @"\W|(3D)|(orig)|(2D)|(dub)", " ");
+            formattedTitle = Regex.Replace(formattedTitle, @"\s+", "+");
+            Debug.WriteLine("originaaltisdfasdf " + formattedTitle);
+            if (formattedTitle.Length - 1 == '+')
             {
-               
-                if ((!splitted[i].Contains("(dub)") || !splitted[i].Contains("2D")) || !splitted[i].Contains("3D")) {
-                    stripped.Add(splitted[i]);
-                }
+                return formattedTitle.Remove(formattedTitle.Length - 1);
             }
-
-            for (int i = 0; i < stripped.Count; i++)
-            {
-                formattedTitle += stripped[i]+"+";
-            }
-         return formattedTitle.Remove(formattedTitle.Length - 1);
+            return formattedTitle;
         }
     }
 }

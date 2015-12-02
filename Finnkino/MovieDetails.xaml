@@ -5,18 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Finnkino"
         mc:Ignorable="d"
-        Title="MovieDetails" Height="600" Width="800"
+        Title="MovieDetails" Height="600" Width="850"
         WindowStartupLocation="CenterOwner"
-        Background="Black">
+        Background="Black"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" x:Name="backgroundImage" Opacity="0.5" />
         </Grid.Background>
-        <TextBlock x:Name="textBlock_Title" Foreground="White" FontSize="24" Margin="0,186,10,0" Text="TextBlock" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" Width="342"/>
+        <TextBlock x:Name="textBlock_Title" Foreground="White" FontSize="24" Margin="0,176,10,0" Text="TextBlock" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" HorizontalAlignment="Right" Width="392"/>
+        <TextBlock x:Name="textBlock_Rating_title" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,244,0,0" TextWrapping="Wrap" Text="IMDb: " VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Rating" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="485,244,0,0" TextWrapping="Wrap" Text="9.9" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Length_title" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="520,244,0,0" TextWrapping="Wrap" Text="Kesto: " VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Length" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="565,244,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock_Genres" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,268,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock3" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,323,20,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock_Tickets" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,0,20,75" TextWrapping="Wrap" Text="Osta liput:" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="comboBox" DisplayMemberPath="ShowableString" HorizontalAlignment="Left" Margin="440,0,0,50" VerticalAlignment="Bottom" Width="160" SelectionChanged="comboBox_SelectionChanged"/>
-        <TextBlock x:Name="textBlock_Rating" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,244,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Tickets" Foreground="White" FontSize="14" HorizontalAlignment="Left" Margin="440,0,20,75" TextWrapping="Wrap" Text="Näytösajat:" VerticalAlignment="Bottom"/>
+        <ComboBox x:Name="comboBox" DisplayMemberPath="ShowableString" HorizontalAlignment="Left" Margin="440,0,0,50" VerticalAlignment="Bottom" Width="160"/>
+        <Button x:Name="button_Tickets" Content="Osta liput" HorizontalAlignment="Left" Margin="610,0,0,50" VerticalAlignment="Bottom" Width="75" Click="button_Tickets_Click"/>
     </Grid>
 </Window>

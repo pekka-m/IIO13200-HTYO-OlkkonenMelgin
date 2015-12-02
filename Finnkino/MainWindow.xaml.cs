@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -100,7 +101,6 @@ namespace Finnkino
 
         private void button_filter_Click(object sender, RoutedEventArgs e)
         {
-
             if (checkBox_allDays.IsChecked == true)
             {
                 filters["Day"] = "Kaikki";
@@ -113,17 +113,13 @@ namespace Finnkino
             this.collection = this.presenter.getMovies(int.Parse(comboBox_Area.SelectedValue.ToString()), filters);
             BrowserIC.ItemsSource = this.collection;
 
-            if (TheaterAuditoriums.Count == 0) {
-
-            TheaterAuditoriums = this.presenter.getAuditoriums();
-            comboBox_Filter_Auditorium.ItemsSource = TheaterAuditoriums;
-            comboBox_Filter_Auditorium.SelectedIndex = 0;
+            if (TheaterAuditoriums.Count == 0)
+            {
+                TheaterAuditoriums = this.presenter.getAuditoriums();
+                comboBox_Filter_Auditorium.ItemsSource = TheaterAuditoriums;
+                comboBox_Filter_Auditorium.SelectedIndex = 0;
             }
-
-
-
-
-
+            Debug.WriteLine("Looppeja pyörii:  " + LoopCounter.loops.ToString());
         }
 
         private void initializeFilters()
@@ -183,14 +179,14 @@ namespace Finnkino
             var parent = button.Parent as FrameworkElement;
             var textBlockEventId = parent.FindName("eventtiId") as TextBlock;
             var textBlockDay = parent.FindName("day") as TextBlock;
-            var textBlockTitle = parent.FindName("textBlock_Title") as TextBlock;
-            //Debug.WriteLine("TÄÄ ON BUTTONIN ID" + textBlock.Text.ToString());
+            var textBlockOriginalTitle = parent.FindName("originalTitle") as TextBlock;
+            Debug.WriteLine("TÄÄ ON originalTitle " + textBlockOriginalTitle.Text.ToString());
 
             MovieDetails movieDetails = new MovieDetails(
                 int.Parse(textBlockEventId.Text.ToString()),
                 int.Parse(comboBox_Area.SelectedValue.ToString()),
                 textBlockDay.Text.ToString(),
-                textBlockTitle.Text
+                textBlockOriginalTitle.Text
                 );
             movieDetails.Owner = this;
             movieDetails.Show();

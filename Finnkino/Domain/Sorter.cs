@@ -1,7 +1,8 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Finnkino
 {
@@ -14,21 +15,22 @@ namespace Finnkino
 
         private void setShowSchedules() {
             // mennään moviecollection lista läpi
-            ObservableCollection<MovieCollection> tempCollection = new ObservableCollection<MovieCollection>();
-          
             for (int i = 0; i < movieCollectionList.Count; i++)
             {
+                LoopCounter.loops++;
 
                 // haetaan yksittäinen moviecollectionlista
                 MovieCollection colletion = movieCollectionList.ElementAt(i);
                 // käydään sen leffat läpi
                 for (int j = 0; j < colletion.Movies.Count ; j++)
                 {
+                    LoopCounter.loops++;
                     Movie leffa = colletion.Movies[j];
                     int leffanId = leffa.EventID;
                     // si tsekataan kaikki ne movieboxlistan leffat läpi ja verrataa onko sama event id
                     for (int q = 0; q < movieBoxList.Count; q++)
                     {
+                        LoopCounter.loops++;
                         // jos on sama eventid, niin sitten tehdään uus show ja lisätään se takasin jonnekki
                         if (leffanId == movieBoxList[q].EventID) {
                             // lisätään siihen sen leffan sali
@@ -94,6 +96,7 @@ namespace Finnkino
             //Debug.WriteLine(this.movieBoxList[0].ShowDate.ToString());
             for (int i = 1; i < this.movieBoxList.Count; i++)
             {
+                LoopCounter.loops++;
                 if (dateToString(this.movieBoxList[i].getShowStart()) != dateToString(this.movieBoxList[i - 1].getShowStart()))
                 {
                     dateList.Add(this.movieBoxList[i].getShowStart());
@@ -119,6 +122,7 @@ namespace Finnkino
             movieBoxListTemp.Add(this.movieBoxList[0]);
             for (i = 0; i < this.movieBoxList.Count; i++)
             {
+                LoopCounter.loops++;
                 if (dateToString(this.movieBoxList[i].getShowStart()) == dateToString(this.dateList[dateListIndex]))
                 {
                     if (!this.eventIds.Contains(this.movieBoxList[i].EventID))

@@ -62,6 +62,7 @@
     <Compile Include="Entities\MovieCollection.cs" />
     <Compile Include="Domain\Filter.cs" />
     <Compile Include="Entities\Movie.cs" />
+    <Compile Include="LoopCounter.cs" />
     <Compile Include="MovieDetails.xaml.cs">
       <DependentUpon>MovieDetails.xaml</DependentUpon>
     </Compile>

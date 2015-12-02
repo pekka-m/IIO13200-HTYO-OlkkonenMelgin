@@ -25,7 +25,9 @@ namespace Finnkino
 
         public TheatreAreas getAreas()
         {
-            return finnkinoApi.getAreas();
+            TheatreAreas areas = finnkinoApi.getAreas();
+            areas.TheatreArea.RemoveAt(0);
+            return areas;
         }
 
 
@@ -43,6 +45,7 @@ namespace Finnkino
             movie.Rating = rating;
             for (int i = 0; i < movies.Shows[0].Show.Count; i++)
             {
+                LoopCounter.loops++;
                 Show show = new Show();
                 show.Id = int.Parse(movies.Shows[0].Show[i].ShowID);
                 show.Auditorium = movies.Shows[0].Show[i].TheatreAuditorium;

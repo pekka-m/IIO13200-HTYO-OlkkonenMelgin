@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Finnkino"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="850"
+        ResizeMode="NoResize">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical" Margin="5">
@@ -37,6 +38,7 @@
                                                             <TextBlock Height="50" x:Name="textBlock_Title" Text="{Binding Title}" TextWrapping="Wrap" />
                                                             <TextBlock Height="0" Visibility="Hidden" x:Name="day" Text="{Binding dttmShowStart}" />
                                                             <TextBlock Height="0" Visibility="Hidden" x:Name="eventtiId" Text="{Binding EventID}" />
+                                                            <TextBlock Height="0" Visibility="Hidden" x:Name="originalTitle" Text="{Binding OriginalTitle}" />
                                                         </StackPanel>
                                                     </Button>
                                                 </StackPanel>
